@@ -1,0 +1,58 @@
+# Contoh virtual host Nginx untuk Super Apps
+# Salin ke conf.d/, sesuaikan root & server_name.
+#
+# Lokal:  server_name super-apps.local;
+# Publik: tambahkan blok TLS (certbot / Let's Encrypt).
+
+server {
+    listen 80;
+    server_name super-apps.local;
+
+    root  C:/laragon/www/super-apps;
+    index index.html;
+
+    # Directory listing WAJIB mati
+    autoindex off;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Manifest selalu segar agar perubahan langsung terlihat
+    location = /projects.manifest.json {
+        add_header Cache-Control "no-cache, must-revalidate";
+        types { application/json json; }
+        default_type application/json;
+    }
+
+    # Aset statis boleh dicache
+    location ~* \.(js|css|svg|png|ico)$ {
+        expires 1h;
+        add_header Cache-Control "public";
+    }
+
+    # Dokumentasi Markdown: sajikan sebagai teks agar tidak terunduh
+    location ~* \.md$ {
+        types { text/markdown md; }
+        default_type text/markdown;
+        charset utf-8;
+    }
+
+    # Sembunyikan file tersembunyi & skrip sumber
+    location ~ /\.(?!well-known) {
+        deny all;
+    }
+    location ~* ^/(scripts|agents|skills|\.github)/ {
+        deny all;
+    }
+
+    # Header keamanan dasar
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    access_log logs/super-apps.access.log;
+    error_log  logs/super-apps.error.log;
+}

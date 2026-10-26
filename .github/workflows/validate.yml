@@ -1,0 +1,35 @@
+name: Validate catalog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Super Apps catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate manifest
+        # Folder project berada di luar repo ini (workspace lokal), jadi
+        # keberadaan folder hanya dilaporkan sebagai warning di CI.
+        run: node scripts/validate-manifest.mjs
+
+      - name: Check manifest is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('projects.manifest.json','utf8')); console.log('JSON OK')"
+
+      - name: Check shell syntax
+        run: node --check app.js
+
+      - name: Check internal documentation links
+        run: node scripts/check-links.mjs
