@@ -68,6 +68,24 @@ git diff --stat
 3. Urutan di array menentukan urutan grup.
 4. Validasi: `node scripts/validate-manifest.mjs`.
 
+### 7. Audit kerentanan dengan AI
+
+Periksa dulu berkas yang akan dikirim ke layanan eksternal:
+
+```bash
+node scripts/audit-security-ai.mjs <id-project> --dry-run
+```
+
+Setelah menyetujui daftar berkas dan menyimpan kredensial di environment, jalankan:
+
+```bash
+$env:GRIPHUBROUTER_API_KEY = "..."
+$env:GRIPHUBROUTER_MODEL = "..."
+node scripts/audit-security-ai.mjs <id-project> --json
+```
+
+Skrip hanya membaca project dan tidak mengubah manifest. Tinjau hasilnya sebelum mengisi `progress` atau `security` pada manifest.
+
 ## Health Check Cepat
 
 ```bash

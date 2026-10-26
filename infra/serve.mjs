@@ -3,10 +3,12 @@
  * HTTP server statis zero-dependency untuk Super Apps.
  *
  * Usage:
- *   node infra/serve.mjs [--port 3000] [--host 127.0.0.1]
+ *   node infra/serve.mjs [--port 3000] [--host 127.0.0.1] [--root <dir>]
  *
  * Perilaku:
- * - Menyajikan semua file dari root repo (satu level di atas infra/).
+ * - Menyajikan berkas dari direktori kerja saat ini (cwd) secara default.
+ *   Ini memungkinkan menjalankan hasil build (mis. folder simulasi deploy)
+ *   tanpa mengubah skrip. Pakai `--root` untuk menunjuk folder lain.
  * - `projects.manifest.json` dikirim dengan Cache-Control: no-cache.
  * - Directory listing dimatikan; hanya index.html.
  */
@@ -15,12 +17,27 @@ import { readFile, stat } from "node:fs/promises";
 import { dirname, extname, join, normalize, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const SCRIPT_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
 const arg = (name, fallback) => {
   const i = args.indexOf(name);
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
+
+// cwd dipakai bila mengandung index.html; kalau tidak, jatuh ke root repo.
+const CWD = process.cwd();
+const ROOT = resolve(
+  arg("--root", CWD === SCRIPT_DIR || (await hasIndex(CWD)) ? CWD : SCRIPT_DIR)
+);
+
+async function hasIndex(dir) {
+  try {
+    await stat(join(dir, "index.html"));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 const PORT = Number(arg("--port", process.env.PORT || 3000));
 const HOST = arg("--host", "127.0.0.1");

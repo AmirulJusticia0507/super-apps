@@ -247,6 +247,7 @@ Semua script zero-dependency (Node ≥ 18).
 | [`docs/guides/project-doc-template.md`](./docs/guides/project-doc-template.md) | Template dokumentasi project |
 | [`docs/guides/conventions.md`](./docs/guides/conventions.md) | Penamaan, commit, branch |
 | [`docs/guides/maintenance.md`](./docs/guides/maintenance.md) | Rutinitas pemeliharaan katalog |
+| [`docs/guides/deploy-vercel.md`](./docs/guides/deploy-vercel.md) | Deploy ke Vercel + catatan privasi |
 | [`docs/roadmap.md`](./docs/roadmap.md) | Rencana pengembangan hub |
 | [`AGENTS.md`](./AGENTS.md) | Aturan kerja agent AI |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Alur kontribusi |

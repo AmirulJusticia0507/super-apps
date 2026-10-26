@@ -1,0 +1,51 @@
+# Abaikan berkas tooling dari unggahan — hub hanya butuh berkas statis.
+
+# ── Dependensi (hub tidak memakai dependensi, ini jaring pengaman) ──────────
+node_modules/
+.pnpm-store/
+
+# ── Artefak build / cache ──────────────────────────────────────────────────
+dist/
+build/
+.vercel/
+.cache/
+.tmp/
+
+# ── Lingkungan & rahasia ───────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── OS / editor ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.bak
+*~
+
+# ══════════════════════════════════════════════════════════════════════════
+#  PUBLIKASI PUBLIK — hanya dashboard + dokumentasi yang aman
+# ══════════════════════════════════════════════════════════════════════════
+# Dashboard hanya membutuhkan:
+#   index.html · app.js · projects.manifest.json
+#
+# CATATAN: /scripts/ TIDAK diabaikan, karena `buildCommand` di vercel.json
+# menjalankan `node scripts/build-public.mjs` untuk menyaring nama repo
+# instansi. Skrip lain di folder itu tetap tidak dirujuk dari dashboard.
+
+# Tooling & dokumentasi internal
+/agents/
+/skills/
+/infra/
+/.github/
+/AGENTS.md
+/CONTRIBUTING.md
+/.gitignore
+
+# Dokumen yang menyebut nama folder instansi
+/docs/guides/scope-and-exclusions.md
+
+# Checklist rilis internal
+/docs/guides/deploy-vercel.md

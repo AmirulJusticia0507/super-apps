@@ -74,10 +74,27 @@ Menyimpan `meta`, `exclusions`, `categories`, dan `apps[]`. Detail skema di [`ma
 | `validate-manifest.mjs` | read-only | Validasi schema & referensi |
 | `check-paths.mjs` | read-only | Cek folder project ada & tidak kosong |
 | `audit-stale.mjs` | read-only | Deteksi project tanpa commit > N hari |
+| `audit-security-ai.mjs` | read-only (mengirim kandidat berkas) | Audit dependency dan konfigurasi via GriphubRouter, per project |
 | `generate-project-docs.mjs` | tulis (`docs/`) | Bulk generate halaman project |
 | `new-project-doc.mjs` | tulis (`docs/`) | Satu halaman project baru |
 
 Semua skrip **zero-dependency** (Node ≥ 18, ESM).
+
+### 4.5 Deployment (Vercel)
+
+Hub sepenuhnya statis, jadi dapat dipublikasikan tanpa server:
+
+| Berkas | Fungsi |
+| --- | --- |
+| `vercel.json` | Framework `null`, tanpa build, `outputDirectory: "."`, header keamanan |
+| `.vercelignore` | Menyingkirkan artefak tooling dari unggahan |
+
+Dua mode:
+
+1. **Git integration** — import repo `AmirulJusticia0507/super-apps` di dashboard Vercel; setiap push ke `main` otomatis deploy.
+2. **CLI** — `vercel deploy` (preview) / `vercel deploy --prod`.
+
+Detail langkah & catatan privasi: [`../guides/deploy-vercel.md`](../guides/deploy-vercel.md).
 
 ### 4.4 Dokumentasi (`docs/`)
 
