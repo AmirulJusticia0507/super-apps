@@ -37,21 +37,24 @@ if (LOCAL) {
 // ── Pengaman: hanya boleh menulis di folder hasil build ──────────────────
 // Skrip ini MENGUBAH berkas di tempat. Di Vercel, build berjalan di salinan
 // sementara — aman. Bila dijalankan di repo kerja, itu akan merusak sumber.
-// Karena itu kita menolak jalan kecuali berada di salinan build.
-const EXPECTED_OUT = join(tmpdir(), "super-apps-build");
-const isBuildDir = resolve(ROOT) === resolve(EXPECTED_OUT);
+// Karena itu kita menolak jalan kecuali berada di lingkungan build:
+//   - Vercel build sandbox   : /vercel/path0  (Linux)
+//   - salinan build lokal    : <tmp>/super-apps-build
+const CRED_DIR = join(tmpdir(), "super-apps-build");
+const isVercel = process.env.VERCEL === "1" || /[\\/]vercel[\\/]path\d+$/i.test(ROOT);
+const isLocalBuildDir = resolve(ROOT) === resolve(CRED_DIR);
 
-if (!isBuildDir) {
+if (!isVercel && !isLocalBuildDir) {
   console.error(
     [
       "✗ Ditolak: build publik hanya boleh berjalan di folder salinan build.",
       `  ROOT terdeteksi : ${ROOT}`,
-      `  Diizinkan      : ${EXPECTED_OUT}`,
+      `  Diizinkan      : ${CRED_DIR} atau Vercel (/vercel/path0)`,
       "",
       "  Skrip ini memodifikasi berkas di tempat dan akan merusak repo bila",
       "  dijalankan langsung. Gunakan:",
-      "    node scripts/simulate-deploy.mjs      # simulasi penuh (aman)",
-      "    node scripts/build-public.mjs --local # tidak melakukan apa pun",
+      "    node scripts/simulate-deploy.mjs       # simulasi penuh (aman)",
+      "    node scripts/build-public.mjs --local  # tidak melakukan apa pun",
     ].join("\n")
   );
   process.exit(2);
