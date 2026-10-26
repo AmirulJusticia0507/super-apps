@@ -6,7 +6,7 @@
   "use strict";
 
   const MANIFEST_URL = "projects.manifest.json";
-  const state = { data: null, query: "", category: "all", theme: "dark" };
+  const state = { data: null, query: "", category: "all", theme: "dark", selectedId: null };
 
   const $ = (sel) => document.querySelector(sel);
   const esc = (s) =>
@@ -71,6 +71,58 @@
       .join(" ")
       .toLowerCase();
     return q.split(/\s+/).every((t) => hay.includes(t));
+  }
+
+  function selectedApp() {
+    return state.data.apps.find((app) => app.id === state.selectedId) || state.data.apps[0];
+  }
+
+  function progressOf(app) {
+    return Number.isInteger(app.progress) && app.progress >= 0 && app.progress <= 100 ? app.progress : null;
+  }
+
+  function securityOf(app) {
+    const security = app.security || {};
+    const status = ["clear", "attention", "critical"].includes(security.status) ? security.status : "not-audited";
+    return { status, findings: Number.isInteger(security.findings) ? security.findings : null, reviewed: security.reviewed || null };
+  }
+
+  function renderSidebar() {
+    const app = selectedApp();
+    const progress = progressOf(app);
+    const security = securityOf(app);
+    const labels = { clear: "Tidak ada temuan terbuka", attention: "Perlu perhatian", critical: "Temuan kritis", "not-audited": "Belum diaudit" };
+    const securityNote = security.status === "not-audited"
+      ? "Belum ada hasil pemindaian kerentanan di manifest."
+      : `${security.findings ?? 0} temuan terbuka${security.reviewed ? ` · ditinjau ${esc(security.reviewed)}` : ""}.`;
+    $("#project-summary").innerHTML = `
+      <div class="sidebar-summary">
+        <p class="eyebrow">Project terpilih</p>
+        <h2 class="sidebar-name">${esc(app.name)}</h2>
+        <p class="sidebar-meta">${esc(app.status)} · ${esc(app.category)}</p>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label"><span>Progress project</span><strong>${progress === null ? "Belum dinilai" : `${progress}%`}</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="Progress ${esc(app.name)}" aria-valuemin="0" aria-valuemax="100"${progress === null ? " aria-valuetext=\"Belum dinilai\"" : ` aria-valuenow="${progress}"`}><div class="progress-value" style="width:${progress ?? 0}%"></div></div>
+        <p class="sidebar-note">Skala kemajuan 0–100%.</p>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label"><span>Kerentanan</span></div>
+        <div class="security-status security-${security.status}"><span class="security-dot" aria-hidden="true"></span>${labels[security.status]}</div>
+        <p class="sidebar-note">${securityNote}</p>
+      </div>`;
+
+    $("#project-list").innerHTML = state.data.apps
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((item) => `<button class="project-select" data-select-project="${esc(item.id)}" aria-current="${item.id === app.id}">${esc(item.name)}</button>`)
+      .join("");
+    $("#project-list").querySelectorAll("[data-select-project]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.selectedId = btn.dataset.selectProject;
+        renderSidebar();
+      });
+    });
   }
 
   function card(app, cat) {
@@ -157,8 +209,10 @@
         Jalankan lewat HTTP server, mis. <code>npx serve .</code> atau <code>python -m http.server</code>.</div>`;
       return;
     }
+    state.selectedId = state.data.apps[0]?.id || null;
     renderStats();
     renderChips();
+    renderSidebar();
     renderGrid();
     $("#q").addEventListener("input", (e) => {
       state.query = e.target.value;

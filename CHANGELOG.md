@@ -10,6 +10,11 @@ dan proyek ini mematuhi [Semantic Versioning](https://semver.org/lang/id/).
 ### Added
 
 - Halaman detail project di dashboard (rencana v1.1).
+- Sidebar project di sisi kiri dengan daftar pilihan project, progress bar 0–100, dan ringkasan audit kerentanan.
+
+### Changed
+
+- Memodernisasi dashboard dengan ringkasan statistik berbentuk panel, hierarki header yang lebih lapang, pemisah grup, dan kartu yang lebih lega serta responsif.
 
 ## [1.0.0] - 2026-10-26
 

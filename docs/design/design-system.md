@@ -100,12 +100,25 @@ Hormati `prefers-reduced-motion` bila menambah animasi baru.
 | **Tombol** | `Path` (sekunder) dan `Repo ↗` (aksen); fokus ring 2px accent. |
 | **Input pencarian** | Ikon kiri, `:focus` ring 2px accent dengan offset 1px. |
 | **Toast** | Muncul dari bawah tengah, auto-hide 2.2 s. |
+| **Sidebar project** | Sticky di desktop; berisi pilihan project, progress bar 0–100, dan status audit kerentanan. |
+| **Progress bar** | Track `--surface-2`, isi `--accent`; progress tak tersedia memakai track kosong dan label `Belum dinilai`. |
+| **Status kerentanan** | Teks status disertai titik warna; status tanpa data selalu `Belum diaudit`, bukan aman. |
+
+### Arah visual dashboard
+
+- Header memakai identitas ringkas, statistik dalam panel permukaan, lalu deretan filter kategori.
+- Statistik mengikuti satu grid responsif dan tetap berasal dari data manifest.
+- Judul kategori memiliki garis pemisah tipis untuk membantu pemindaian katalog panjang.
+- Kartu memakai ruang dalam yang lebih lega, ikon kategori berbingkai halus, dan pemisah aksi solid.
+- Logo memakai latar aksen lembut berbasis token; tanpa gradien latar halaman atau aset eksternal.
+- Pada layar kecil, statistik menjadi dua kolom dan kartu menjadi satu kolom.
 
 ## Grid & Responsif
 
 - Grid kartu: `repeat(auto-fill, minmax(290px, 1fr))`, gap 14px.
 - Kontainer maksimum 1280px, padding horizontal 24px.
 - < 560px: kolom pencarian mengambil satu baris penuh.
+- < 760px: sidebar berpindah ke atas katalog dan tidak lagi sticky.
 
 ## Aksesibilitas
 

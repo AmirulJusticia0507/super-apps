@@ -59,6 +59,7 @@ Pengguna masuk ke satu halaman dan dalam < 10 detik bisa:
 | Klik `Repo ↗` | Buka tab baru |
 | Toggle tema | Ganti `data-theme`, simpan di `localStorage` |
 | `/` | Fokus ke kolom pencarian (diabaikan bila sudah fokus di input) |
+| Klik nama project di sidebar | Memilih project dan memperbarui ringkasan progress serta kerentanan |
 
 ### Urutan Render
 
@@ -77,6 +78,14 @@ Yang dicari: `name`, `tagline`, `dir`, `id`, `stack[]`, `tags[]`.
 | `query` | `""` | — (reset saat reload) |
 | `category` | `all` | — |
 | `theme` | `prefers-color-scheme` | `localStorage["superapps-theme"]` |
+| `selectedId` | project pertama pada manifest | — |
+
+## Sidebar project
+
+Sidebar berada di sisi kiri pada layar desktop dan berpindah ke atas katalog pada layar sempit. Daftar project memakai tombol asli untuk memilih project. Ringkasan project terpilih berisi:
+
+- **Progress project**: progress bar skala 0–100 dari `apps[].progress`. Bila field tidak tersedia, nilainya ditampilkan sebagai **Belum dinilai**.
+- **Kerentanan**: status dan jumlah temuan terbuka dari `apps[].security`. Bila belum ada data audit, tampil **Belum diaudit** tanpa mengklaim project aman.
 
 ## Error & Empty State
 

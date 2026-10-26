@@ -63,6 +63,18 @@ Urutan array menentukan urutan grup di dashboard.
 | `docs` | string[] | — | Path dokumen relatif ke folder project |
 | `tags` | string[] | — | Kata kunci pencarian tambahan |
 | `gaps` | string[] | — | Kekurangan yang diketahui (tanpa README, dll.) |
+| `progress` | integer | — | Kemajuan project, 0–100. Tidak diisi berarti belum dinilai. |
+| `security` | object | — | Ringkasan audit kerentanan; tidak diisi berarti belum diaudit. |
+
+### `apps[].security`
+
+| Field | Tipe | Wajib bila `security` ada | Keterangan |
+| --- | --- | --- | --- |
+| `status` | enum | ✓ | `clear`, `attention`, atau `critical` |
+| `findings` | integer ≥ 0 | ✓ | Jumlah temuan terbuka dari audit terakhir |
+| `reviewed` | string | — | Tanggal audit `YYYY-MM-DD` |
+
+Progress dan security hanya boleh diisi dari pencatatan kemajuan atau audit nyata. Dashboard menampilkan status **Belum dinilai** dan **Belum diaudit** saat field tidak ada.
 
 ### Aturan Status
 

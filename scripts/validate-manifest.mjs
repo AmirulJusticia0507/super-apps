@@ -63,6 +63,17 @@ for (const [i, app] of (manifest.apps ?? []).entries()) {
   if (app.stack && (!Array.isArray(app.stack) || app.stack.length === 0)) warn(`${where}: stack kosong`);
   if (app.tags && !Array.isArray(app.tags)) fail(`${where}: tags harus array`);
   if (app.docs && !Array.isArray(app.docs)) fail(`${where}: docs harus array`);
+  if (app.progress !== undefined && (!Number.isInteger(app.progress) || app.progress < 0 || app.progress > 100)) {
+    fail(`${where}: progress harus bilangan bulat 0–100`);
+  }
+  if (app.security !== undefined) {
+    if (!app.security || typeof app.security !== "object" || Array.isArray(app.security)) fail(`${where}: security harus object`);
+    else {
+      if (!["clear", "attention", "critical"].includes(app.security.status)) fail(`${where}: security.status harus clear/attention/critical`);
+      if (!Number.isInteger(app.security.findings) || app.security.findings < 0) fail(`${where}: security.findings harus bilangan bulat ≥ 0`);
+      if (app.security.reviewed !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(app.security.reviewed)) fail(`${where}: security.reviewed harus YYYY-MM-DD`);
+    }
+  }
 
   if (app.dir && !(await exists(join(WORKSPACE, app.dir)))) warn(`${where}: folder ${WORKSPACE}/${app.dir} tidak ditemukan`);
 
