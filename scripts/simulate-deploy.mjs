@@ -102,14 +102,22 @@ await cp(ROOT, OUT, {
 });
 
 /* ── 2. Jalankan buildCommand dari vercel.json ───────────────────────── */
+// build-public.mjs menolak menulis di luar folder build-nya, jadi kita
+// menirukan perilaku Vercel: salin hasil saring ke folder build terpisah.
 const vercelJson = JSON.parse(await readFile(join(OUT, "vercel.json"), "utf8"));
 const build = vercelJson.buildCommand;
 const [cmd, ...cliArgs] = build.split(" ");
+const BUILD_OUT = join(tmpdir(), "super-apps-build");
+await rm(BUILD_OUT, { recursive: true, force: true });
+await cp(OUT, BUILD_OUT, { recursive: true });
 const { stdout } = await exec(cmd, cliArgs, {
-  cwd: OUT,
-  env: { ...process.env, SUPERAPPS_PUBLIC: "1" },
+  cwd: BUILD_OUT,
+  env: { ...process.env },
   windowsHide: true,
 });
+// Sajikan & audit dari folder build (itulah yang di-deploy).
+await rm(OUT, { recursive: true, force: true });
+await cp(BUILD_OUT, OUT, { recursive: true });
 
 /* ── 3. Audit ─────────────────────────────────────────────────────────── */
 const report = { buildOutput: stdout.trim().split(/\r?\n/), errors: [], warnings: [] };

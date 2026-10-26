@@ -2,12 +2,16 @@
 /**
  * Bangun varian publik untuk deploy (Vercel).
  *
- * Mode lokal (default): tidak melakukan apa pun.
+ * Mode lokal: tidak melakukan apa pun.
+ *   node scripts/build-public.mjs --local
+ *   (atau SUPERAPPS_PUBLIC=0)
+ *
+ * Mode publik (DEFAULT, dipakai Vercel): menyaring data & dokumen yang menyebut
+ * repo instansi / pihak ketiga, TANPA mengubah berkas sumber di git.
  *   node scripts/build-public.mjs
  *
- * Mode publik (dipakai Vercel): menyaring data & dokumen yang menyebut
- * repo instansi / pihak ketiga, TANPA mengubah berkas sumber di git.
- *   SUPERAPPS_PUBLIC=1 node scripts/build-public.mjs
+ * Default sengaja "publik" agar deploy yang lupa menyetel env var tetap aman:
+ * lebih baik menyaring berlebihan daripada membocorkan nama repo instansi.
  *
  * Yang terjadi pada mode publik:
  *   1. projects.manifest.json  → `exclusions.excluded` dikosongkan,
@@ -17,17 +21,42 @@
  *
  * Berkas sumber tetap utuh; hanya hasil deploy yang disaring.
  */
-import { readFile, writeFile, copyFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { tmpdir } from "node:os";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const PUBLIC = process.env.SUPERAPPS_PUBLIC === "1";
+const LOCAL = process.argv.includes("--local") || process.env.SUPERAPPS_PUBLIC === "0";
 
-if (!PUBLIC) {
-  console.log("Mode lokal — tidak ada perubahan. (set SUPERAPPS_PUBLIC=1 untuk build publik)");
+if (LOCAL) {
+  console.log("Mode lokal — tidak ada perubahan.");
   process.exit(0);
 }
+
+// ── Pengaman: hanya boleh menulis di folder hasil build ──────────────────
+// Skrip ini MENGUBAH berkas di tempat. Di Vercel, build berjalan di salinan
+// sementara — aman. Bila dijalankan di repo kerja, itu akan merusak sumber.
+// Karena itu kita menolak jalan kecuali berada di salinan build.
+const EXPECTED_OUT = join(tmpdir(), "super-apps-build");
+const isBuildDir = resolve(ROOT) === resolve(EXPECTED_OUT);
+
+if (!isBuildDir) {
+  console.error(
+    [
+      "✗ Ditolak: build publik hanya boleh berjalan di folder salinan build.",
+      `  ROOT terdeteksi : ${ROOT}`,
+      `  Diizinkan      : ${EXPECTED_OUT}`,
+      "",
+      "  Skrip ini memodifikasi berkas di tempat dan akan merusak repo bila",
+      "  dijalankan langsung. Gunakan:",
+      "    node scripts/simulate-deploy.mjs      # simulasi penuh (aman)",
+      "    node scripts/build-public.mjs --local # tidak melakukan apa pun",
+    ].join("\n")
+  );
+  process.exit(2);
+}
+
 
 const changes = [];
 
@@ -35,8 +64,13 @@ const changes = [];
 const manifestPath = join(ROOT, "projects.manifest.json");
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 
-const excludedCount = manifest.exclusions?.excluded?.length ?? 0;
-const notesCount = manifest.exclusions?.notes?.length ?? 0;
+// Idempoten: build bisa berjalan lebih dari sekali (simulasi & salinan build).
+// `excludedCount` disimpan agar tidak hilang saat build kedua.
+const excludedCount =
+  manifest.exclusions?.excludedCount ??
+  manifest.exclusions?.excluded?.length ??
+  0;
+const notesCount = manifest.exclusions?.notes?.length ?? manifest.exclusions?.excludedCount ?? 0;
 
 manifest.exclusions = {
   policy:
