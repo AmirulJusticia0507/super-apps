@@ -98,6 +98,33 @@
   .project-select:hover { color: var(--text); background: var(--surface-2); }
   .project-select[aria-current="true"] { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--text); font-weight: 650; }
   main { min-width: 0; }
+  .audit-page { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .audit-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .audit-title { margin: 0; font-size: 1.4rem; letter-spacing: -.025em; }
+  .audit-sub { margin: 7px 0 0; color: var(--muted); font-size: .82rem; }
+  .audit-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr); gap: 16px; margin-top: 20px; }
+  .audit-panel { padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-raised); }
+  .audit-panel h3 { margin: 0; font-size: .9rem; }
+  .audit-panel p { margin: 8px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+  .audit-field { display: grid; gap: 7px; margin-top: 16px; color: var(--muted); font-size: .75rem; }
+  .audit-field input { width: 100%; padding: 10px 11px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 9px; font: inherit; }
+  .audit-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .audit-btn { padding: 8px 11px; border: 1px solid var(--border); border-radius: 9px; color: var(--text); background: var(--surface); cursor: pointer; font: inherit; font-size: .76rem; font-weight: 650; }
+  .audit-btn.primary { border-color: var(--accent); color: #fff; background: var(--accent); }
+  .audit-files { margin: 13px 0 0; padding-left: 18px; color: var(--muted); font-size: .76rem; line-height: 1.7; }
+  .audit-note { margin-top: 12px; font-size: .76rem; color: var(--muted); }
+  .audit-note.loading { color: var(--accent); }
+  .audit-note.ok { color: var(--security-clear); }
+  .audit-note.error { color: var(--security-critical); }
+  .audit-result { margin-top: 14px; }
+  .audit-result > p { color: var(--muted); font-size: .76rem; margin: 8px 0; }
+  .audit-result details { margin-top: 8px; }
+  .audit-result summary { cursor: pointer; color: var(--accent); font-size: .76rem; }
+  .audit-raw { max-height: 280px; overflow: auto; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 12px; font-size: .72rem; color: var(--muted); white-space: pre-wrap; }
+  .audit-editor { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .audit-field select, .audit-field textarea { width: 100%; padding: 10px 11px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 9px; font: inherit; }
+  .audit-field textarea { resize: vertical; line-height: 1.5; }
+  .audit-btn:disabled { opacity: .55; cursor: progress; }
   .group-title {
     font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
     color: var(--muted); margin: 30px 0 14px; font-weight: 650; display: flex; align-items: center; gap: 10px;
@@ -153,7 +180,7 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   @media (max-width: 960px) { .dashboard { grid-template-columns: 232px minmax(0, 1fr); gap: 16px; } }
-  @media (max-width: 760px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dashboard { grid-template-columns: 1fr; } .sidebar { position: static; } .project-list { max-height: 220px; } }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dashboard { grid-template-columns: 1fr; } .sidebar { position: static; } .project-list { max-height: 220px; } .audit-grid { grid-template-columns: 1fr; } }
   @media (max-width: 560px) {
     header { padding: 22px 16px 0; }
     .dashboard { padding: 12px 16px 48px; }
@@ -163,6 +190,8 @@
     .controls { width: 100%; }
     .group-title { margin-top: 25px; }
     .grid { grid-template-columns: 1fr; }
+    .audit-page { padding: 16px; }
+    .audit-top { display: grid; }
     input[type="search"] { width: 100%; }
     .search { flex: 1 1 100%; }
   }

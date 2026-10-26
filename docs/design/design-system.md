@@ -103,6 +103,7 @@ Hormati `prefers-reduced-motion` bila menambah animasi baru.
 | **Sidebar project** | Sticky di desktop; berisi pilihan project, progress bar 0–100, dan status audit kerentanan. |
 | **Progress bar** | Track `--surface-2`, isi `--accent`; progress tak tersedia memakai track kosong dan label `Belum dinilai`. |
 | **Status kerentanan** | Teks status disertai titik warna; status tanpa data selalu `Belum diaudit`, bukan aman. |
+| **Halaman audit** | Dibuka dari pilihan project di sidebar; model AI memakai input teks dan aksi hanya menyalin perintah audit lokal. |
 
 ### Arah visual dashboard
 

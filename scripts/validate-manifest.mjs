@@ -72,6 +72,7 @@ for (const [i, app] of (manifest.apps ?? []).entries()) {
       if (!["clear", "attention", "critical"].includes(app.security.status)) fail(`${where}: security.status harus clear/attention/critical`);
       if (!Number.isInteger(app.security.findings) || app.security.findings < 0) fail(`${where}: security.findings harus bilangan bulat ≥ 0`);
       if (app.security.reviewed !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(app.security.reviewed)) fail(`${where}: security.reviewed harus YYYY-MM-DD`);
+      if (app.security.summary !== undefined && typeof app.security.summary !== "string") fail(`${where}: security.summary harus string`);
     }
   }
 

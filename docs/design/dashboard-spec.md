@@ -86,6 +86,7 @@ Sidebar berada di sisi kiri pada layar desktop dan berpindah ke atas katalog pad
 
 - **Progress project**: progress bar skala 0–100 dari `apps[].progress`. Bila field tidak tersedia, nilainya ditampilkan sebagai **Belum dinilai**.
 - **Kerentanan**: status dan jumlah temuan terbuka dari `apps[].security`. Bila belum ada data audit, tampil **Belum diaudit** tanpa mengklaim project aman.
+- Klik project membuka halaman audit di area katalog. Halaman ini menerima model slug GriphubRouter dan menyediakan perintah audit lokal tanpa mengekspos API key di browser.
 
 ## Error & Empty State
 

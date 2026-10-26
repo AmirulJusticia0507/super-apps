@@ -10,7 +10,7 @@
 | **Status** | `active` |
 | **Entry point** | `server.js` |
 | **Repository** | <https://github.com/AmirulJusticia0507/41cards.git> |
-| **Stack** | Node.js, Vercel, Upstash Redis |
+| **Stack** | Node.js, Vercel, PostgreSQL |
 | **Tags** | `card-game`, `realtime`, `serverless` |
 
 ## Ringkasan
@@ -36,7 +36,7 @@ Ikuti instruksi instalasi di README project untuk prasyarat runtime, database, d
 
 - Node.js
 - Vercel
-- Upstash Redis
+- PostgreSQL
 
 ## Catatan
 

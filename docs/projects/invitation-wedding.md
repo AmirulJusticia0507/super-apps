@@ -29,7 +29,7 @@ Ikuti instruksi instalasi di README project untuk prasyarat runtime, database, d
 
 ## Dokumentasi Internal Project
 
-- `README.md`
+- _(tidak ada)_
 
 ## Stack
 

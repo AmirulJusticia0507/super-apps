@@ -70,7 +70,21 @@ git diff --stat
 
 ### 7. Audit kerentanan dengan AI
 
-Periksa dulu berkas yang akan dikirim ke layanan eksternal:
+Ada dua cara menjalankan audit:
+
+**A. Lewat dashboard (tanpa terminal).** Jalankan server lokal, lalu buka halaman audit project:
+
+```bash
+node infra/serve.mjs --port 8811     # http://127.0.0.1:8811
+```
+
+Di halaman audit: pilih model (default `gpt-5.6-terra`) → klik **Jalankan Audit**.
+Server menjalankan `scripts/audit-security-ai.mjs` di sisi server; `GRIPHUBROUTER_API_KEY`
+dibaca dari environment server dan **tidak pernah ke browser**. Hasil tampil beserta
+editor; edit ringkasan hasil verifikasi lalu klik **Simpan ke manifest** (menulis hanya
+field `security`).
+
+**B. Lewat terminal.** Periksa dulu berkas yang akan dikirim ke layanan eksternal:
 
 ```bash
 node scripts/audit-security-ai.mjs <id-project> --dry-run
@@ -84,7 +98,7 @@ $env:GRIPHUBROUTER_MODEL = "..."
 node scripts/audit-security-ai.mjs <id-project> --json
 ```
 
-Skrip hanya membaca project dan tidak mengubah manifest. Tinjau hasilnya sebelum mengisi `progress` atau `security` pada manifest.
+Skrip hanya membaca project dan tidak mengubah manifest. Di Windows, skrip membaca `GRIPHUBROUTER_API_KEY` dan `GRIPHUBROUTER_MODEL` dari User environment bila terminal aktif belum mewarisinya. Tinjau hasilnya sebelum mengisi `progress` atau `security` pada manifest.
 
 ## Health Check Cepat
 

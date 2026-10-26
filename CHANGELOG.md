@@ -16,6 +16,8 @@ dan proyek ini mematuhi [Semantic Versioning](https://semver.org/lang/id/).
 ### Changed
 
 - Memodernisasi dashboard dengan ringkasan statistik berbentuk panel, hierarki header yang lebih lapang, pemisah grup, dan kartu yang lebih lega serta responsif.
+- Hasil audit AI Al-Hikmah AI tercatat sebagai `attention` dengan 11 temuan yang perlu ditinjau.
+- Auditor AI di Windows membaca kredensial dari User environment saat terminal aktif belum mewarisinya.
 
 ## [1.0.0] - 2026-10-26
 

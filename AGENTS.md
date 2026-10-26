@@ -43,8 +43,10 @@ node scripts/check-paths.mjs
 Jika mengubah UI:
 
 ```powershell
-python -m http.server 8811
-# buka http://localhost:8811/ → periksa console
+node infra/serve.mjs --port 8811
+# buka http://127.0.0.1:8811/ → periksa console
+# (pakai node infra/serve.mjs agar tombol "Jalankan Audit" di halaman audit aktif;
+#  pastikan GRIPHUBROUTER_API_KEY ada di environment server)
 ```
 
 ## Struktur Peran

@@ -73,6 +73,7 @@ Urutan array menentukan urutan grup di dashboard.
 | `status` | enum | ✓ | `clear`, `attention`, atau `critical` |
 | `findings` | integer ≥ 0 | ✓ | Jumlah temuan terbuka dari audit terakhir |
 | `reviewed` | string | — | Tanggal audit `YYYY-MM-DD` |
+| `summary` | string | — | Ringkasan hasil audit dan prioritas tindak lanjut |
 
 Progress dan security hanya boleh diisi dari pencatatan kemajuan atau audit nyata. Dashboard menampilkan status **Belum dinilai** dan **Belum diaudit** saat field tidak ada.
 
