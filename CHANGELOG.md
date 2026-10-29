@@ -11,6 +11,7 @@ dan proyek ini mematuhi [Semantic Versioning](https://semver.org/lang/id/).
 
 - Project `biochemverse` (BioChemVerse) pada kategori Education & Experiments: entri manifest, junction `BioChemVerse/`, dan halaman `docs/projects/biochemverse.md`.
 - Project `chemsphere` (ChemSphere) pada kategori Education & Experiments: entri manifest dan halaman `docs/projects/chemsphere.md` (junction sudah ada sebelumnya).
+- Field `url` pada `apps[]` untuk URL aplikasi live/demo, dengan validasi http(s), tombol **Live ↗** di kartu dashboard, dan pencatatan URL pada `biochemverse` + `chemsphere`.
 - Halaman detail project di dashboard (rencana v1.1).
 - Sidebar project di sisi kiri dengan daftar pilihan project, progress bar 0–100, dan ringkasan audit kerentanan.
 - Skrip audit AI per project untuk dependency dan konfigurasi melalui endpoint GriphubRouter yang kompatibel OpenAI.

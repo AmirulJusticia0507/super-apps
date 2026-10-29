@@ -1133,6 +1133,7 @@
       "category": "education",
       "status": "active",
       "repo": "https://github.com/AmirulJusticia0507/BioChemVerse.git",
+      "url": "https://biochemverse.vercel.app/",
       "stack": [
         "Vue",
         "Vite",
@@ -1167,6 +1168,7 @@
       "category": "education",
       "status": "active",
       "repo": "https://github.com/AmirulJusticia0507/ChemSphere.git",
+      "url": "https://chemsphere-app.vercel.app/",
       "stack": [
         "Vue",
         "Vite",

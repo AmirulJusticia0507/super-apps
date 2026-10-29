@@ -10,6 +10,7 @@
 | **Status** | `active` |
 | **Entry point** | `frontend/` |
 | **Repository** | <https://github.com/AmirulJusticia0507/BioChemVerse.git> |
+| **Live** | <https://biochemverse.vercel.app/> |
 | **Stack** | Vue, Vite, Tailwind CSS, Three.js, FastAPI, Python, PostgreSQL, Redis, Go |
 | **Tags** | `chemistry`, `periodic-table`, `forensic`, `anatomy`, `3d`, `education` |
 
@@ -109,3 +110,4 @@ Disalin dari `.env.example` di root menjadi `.env`.
 | --- | --- |
 | 2026-10-26 | Halaman dokumentasi dibuat dari manifest. |
 | 2026-10-29 | Ditambahkan ke katalog Super Apps (entri manifest + junction). |
+| 2026-10-29 | URL live `https://biochemverse.vercel.app/` dicatat pada field `url` manifest (tombol **Live ↗** di dashboard). |

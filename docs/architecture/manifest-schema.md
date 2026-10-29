@@ -59,6 +59,7 @@ Urutan array menentukan urutan grup di dashboard.
 | `status` | enum | ✓ | `active` \| `maintenance` \| `archived` |
 | `stack` | string[] | ✓ | Minimal 1 teknologi |
 | `repo` | string (URL) | — | Remote URL; kosong bila lokal |
+| `url` | string (URL) | — | URL aplikasi live/demo (http/https). Tampil sebagai tombol **Live ↗** di dashboard. |
 | `entry` | string | — | File/folder entry point |
 | `docs` | string[] | — | Path dokumen relatif ke folder project |
 | `tags` | string[] | — | Kata kunci pencarian tambahan |

@@ -62,6 +62,9 @@ for (const [i, app] of (manifest.apps ?? []).entries()) {
 
   if (app.stack && (!Array.isArray(app.stack) || app.stack.length === 0)) warn(`${where}: stack kosong`);
   if (app.tags && !Array.isArray(app.tags)) fail(`${where}: tags harus array`);
+  if (app.url !== undefined && (typeof app.url !== "string" || !/^https?:\/\/[^\s]+$/.test(app.url))) {
+    fail(`${where}: url harus URL http(s) yang valid`);
+  }
   if (app.docs && !Array.isArray(app.docs)) fail(`${where}: docs harus array`);
   if (app.progress !== undefined && (!Number.isInteger(app.progress) || app.progress < 0 || app.progress > 100)) {
     fail(`${where}: progress harus bilangan bulat 0–100`);

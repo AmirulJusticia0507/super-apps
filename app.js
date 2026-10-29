@@ -315,6 +315,9 @@
     const repoBtn = app.repo
       ? `<a class="open" href="${esc(app.repo)}" target="_blank" rel="noopener" title="Buka repository">Repo ↗</a>`
       : "";
+    const liveBtn = app.url
+      ? `<a class="open" href="${esc(app.url)}" target="_blank" rel="noopener" title="Buka aplikasi live">Live ↗</a>`
+      : "";
     return `
       <article class="card" style="--card-color:${esc(color)}">
         <div class="card-head">
@@ -329,6 +332,7 @@
         <div class="card-foot">
           <span class="path" title="${esc(app.dir)}">../${esc(app.dir)}</span>
           <div style="display:flex;gap:6px">
+            ${liveBtn}
             ${repoBtn}
             <button class="open" data-copy="${esc(app.dir)}" title="Salin path project">Path</button>
           </div>

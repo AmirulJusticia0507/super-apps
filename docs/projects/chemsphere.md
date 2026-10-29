@@ -10,6 +10,7 @@
 | **Status** | `active` |
 | **Entry point** | `frontend/` |
 | **Repository** | <https://github.com/AmirulJusticia0507/ChemSphere.git> |
+| **Live** | <https://chemsphere-app.vercel.app/> |
 | **Stack** | Vue, Vite, Tailwind CSS, Pinia, Express, Prisma, PostgreSQL, Vercel |
 | **Tags** | `chemistry`, `periodic-table`, `quiz`, `stoichiometry`, `education` |
 
@@ -105,3 +106,4 @@ File contoh: `backend/.env.example`; di frontend gunakan `frontend/.env`.
 | Tanggal | Perubahan |
 | --- | --- |
 | 2026-10-29 | Didaftarkan ke katalog Super Apps (entri manifest + halaman dokumentasi). |
+| 2026-10-29 | URL live `https://chemsphere-app.vercel.app/` dicatat pada field `url` manifest (tombol **Live ↗** di dashboard). |
