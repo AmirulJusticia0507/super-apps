@@ -1126,6 +1126,72 @@
       ]
     },
     {
+      "id": "biochemverse",
+      "dir": "BioChemVerse",
+      "name": "BioChemVerse",
+      "tagline": "Ekosistem interaktif kimia, sains forensik, dan anatomi manusia 3D",
+      "category": "education",
+      "status": "active",
+      "repo": "https://github.com/AmirulJusticia0507/BioChemVerse.git",
+      "stack": [
+        "Vue",
+        "Vite",
+        "Tailwind CSS",
+        "Three.js",
+        "FastAPI",
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Go"
+      ],
+      "entry": "frontend/",
+      "docs": [
+        "README.md",
+        "AGENTS.md",
+        "TODO.md"
+      ],
+      "tags": [
+        "chemistry",
+        "periodic-table",
+        "forensic",
+        "anatomy",
+        "3d",
+        "education"
+      ]
+    },
+    {
+      "id": "chemsphere",
+      "dir": "ChemSphere",
+      "name": "ChemSphere",
+      "tagline": "Aplikasi pembelajaran kimia: tabel periodik, kuis, kalkulator stoikiometri, panel admin",
+      "category": "education",
+      "status": "active",
+      "repo": "https://github.com/AmirulJusticia0507/ChemSphere.git",
+      "stack": [
+        "Vue",
+        "Vite",
+        "Tailwind CSS",
+        "Pinia",
+        "Express",
+        "Prisma",
+        "PostgreSQL",
+        "Vercel"
+      ],
+      "entry": "frontend/",
+      "docs": [
+        "README.md",
+        "AGENTS.md",
+        "TODO.md"
+      ],
+      "tags": [
+        "chemistry",
+        "periodic-table",
+        "quiz",
+        "stoichiometry",
+        "education"
+      ]
+    },
+    {
       "id": "54-testdna",
       "dir": "54_testDNA",
       "name": "DNA Analysis Dashboard",
