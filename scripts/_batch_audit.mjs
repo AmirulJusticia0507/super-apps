@@ -22,16 +22,31 @@ for (let i = 0; i < targets.length; i++) {
   const app = targets[i];
   console.log(`\n[${i + 1}/${targets.length}] ${app.id} (${app.dir})`);
   let out;
-  try {
-    out = execFileSync(process.execPath, [join(ROOT, "scripts", "audit-security-ai.mjs"), app.id, "--json"], {
-      env: { ...process.env, GRIPHUBROUTER_API_KEY: API_KEY, GRIPHUBROUTER_MODEL: MODEL },
-      encoding: "utf8",
-      maxBuffer: 10 * 1024 * 1024,
-      timeout: 300000,
-      windowsHide: true,
-    });
-  } catch (e) {
-    console.error(`  GAGAL: ${String(e.stderr || e.message).slice(0, 500)}`);
+  let attempt = 0;
+  while (attempt < 3) {
+    attempt++;
+    try {
+      out = execFileSync(process.execPath, [join(ROOT, "scripts", "audit-security-ai.mjs"), app.id, "--json"], {
+        env: { ...process.env, GRIPHUBROUTER_API_KEY: API_KEY, GRIPHUBROUTER_MODEL: MODEL },
+        encoding: "utf8",
+        maxBuffer: 10 * 1024 * 1024,
+        timeout: 300000,
+        windowsHide: true,
+      });
+      break;
+    } catch (e) {
+      const msg = String(e.stderr || e.message).slice(0, 300);
+      console.error(`  Percobaan ${attempt} gagal: ${msg.split("\\n")[0]}`);
+      if (attempt < 3) {
+        // delay sederhana via busy-wait (tanpa setTimeout di ESM? tersedia)
+        const wait = 8000 * attempt;
+        const start = Date.now();
+        while (Date.now() - start < wait) {}
+      }
+    }
+  }
+  if (!out) {
+    console.error(`  LEWATI ${app.id} setelah 3 percobaan.`);
     continue;
   }
   let parsed;
@@ -63,6 +78,8 @@ for (let i = 0; i < targets.length; i++) {
   };
   writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + "\n", "utf8");
   console.log(`  OK status=${status} findings=${findings.length}`);
+  const dstart = Date.now();
+  while (Date.now() - dstart < 3000) {}
 }
 
 console.log("\nSelesai.");

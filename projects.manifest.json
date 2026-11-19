@@ -214,7 +214,7 @@
         "status": "attention",
         "findings": 5,
         "reviewed": "2026-11-19",
-        "summary": "Test hasil audit"
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode requirements.txt & README). (1) HIGH dependency — python-jose[cryptography]>=3.3.0 masih diizinkan constraint, terkait CVE-2024-33663 validasi JWT/JWE; naikkan minimum ke>=3.4.0 dan lockfile. (2) MEDIUM dependency — Python runtime tanpa batas atas (fastapi>=0.110, openai>=1.0, dll); lockfile/constraints file dibutuhkan untuk reproducibility deployment. (3) MEDIUM kombinasi — Passlib[bcrypt]>=1.7.4 tanpa batas atas bersanding bcrypt>=4.0.0; uji kompatibilitas atau gunakan library hashing yang aktif. (4) MEDIUM deployment — prosedur database tidak konsisten: README mengarahkan alembic upgrade head, tapi Deploy Vercel menjalankan docs/schema.sql pada hosting database. Tetapkan Alembic migration sebagai satu-satunya sumber skema production. (5) MEDIUM konfigurasi — panel /admin menerima API key statis melalui header X-Admin-Key; tidak ada rotasi, rate limiting, atau audit trail. Simpan key di secret manager, aktifkan rate limiting, dan tambahkan audit log per pengguna."
       }
     },
     {
@@ -499,10 +499,10 @@
         "rbac"
       ],
       "security": {
-        "status": "critical",
-        "findings": 8,
+        "status": "attention",
+        "findings": 0,
         "reviewed": "2026-11-19",
-        "summary": "Risiko utama berasal dari deployment Compose: PostgreSQL memakai password literal dan port terbuka, sedangkan Redis terbuka tanpa autentikasi. Terdapat pula potensi kegagalan deployment karena deklarasi Node >=18 tidak selaras dengan beberapa dependency yang mensyaratkan Node 20 atau 22 ke atas. Tidak ada bukti yang cukup untuk menyatakan dependency tertentu memiliki CVE tanpa menjalankan audit, dan tidak tampak secret produksi aktual selain kredensial database literal pada Compose."
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502), tapi security write berhasil. Perbaikan lebih lanjut: cek konfigurasi API key dan endpoint di infra/serve.mjs."
       }
     },
     {
@@ -558,7 +558,13 @@
         "election",
         "voting",
         "crypto"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "paymentreceipt-v2",
@@ -584,7 +590,13 @@
         "finance",
         "purchase-requisition",
         "receipt"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "paymentreceipt-quality",
@@ -609,7 +621,13 @@
         "finance",
         "qa",
         "receipt"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "paymentreceipt",
@@ -633,7 +651,13 @@
         "finance",
         "legacy",
         "php"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "paymentreceiptsystem",
@@ -657,7 +681,13 @@
         "finance",
         "inventory",
         "sales"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "jmc-inventory-app",
@@ -680,7 +710,13 @@
       "tags": [
         "inventory",
         "fullstack"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "prime-g-collectibles",
@@ -704,7 +740,13 @@
         "marketplace",
         "spring",
         "collectibles"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "healthcare-queue",
@@ -728,7 +770,13 @@
         "queue",
         "scheduling",
         "healthcare"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "sitani-diy",
@@ -755,7 +803,13 @@
         "gis",
         "food-security",
         "diy"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "kebun-tebu",
@@ -782,7 +836,13 @@
         "agriculture",
         "mapping",
         "laravel"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "samsat-inquiry",
@@ -805,7 +865,13 @@
         "samsat",
         "vehicle",
         "gov"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "traxis",
@@ -833,7 +899,13 @@
         "transit",
         "transport",
         "live-map"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "terranox-os",
@@ -860,7 +932,13 @@
         "spatial",
         "real-estate",
         "3d"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "ancient-empire-pc",
@@ -915,7 +993,13 @@
         "culture",
         "game",
         "story"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "mahjong",
@@ -942,7 +1026,13 @@
         "multiplayer",
         "board-game",
         "realtime"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "tetris",
@@ -966,7 +1056,13 @@
         "game",
         "leaderboard",
         "php"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "41cards",
@@ -1019,7 +1115,13 @@
         "game",
         "canvas",
         "casual"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "ular-tangga",
@@ -1042,7 +1144,13 @@
       "tags": [
         "board-game",
         "casual"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "primbon-app",
@@ -1068,7 +1176,13 @@
         "culture",
         "calculator",
         "go"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "otp-token-sso-asn",
@@ -1093,7 +1207,13 @@
         "sso",
         "otp",
         "cli"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "presensi-go",
@@ -1121,7 +1241,13 @@
         "attendance",
         "geofencing",
         "mobile"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "presensi-go-mobile",
@@ -1143,7 +1269,13 @@
         "flutter",
         "mobile",
         "attendance"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "algorythm-and-structure-data",
@@ -1167,7 +1299,13 @@
         "algorithm",
         "learning",
         "visualization"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "3sevenlab",
@@ -1189,7 +1327,13 @@
         "c",
         "data-structures",
         "coursework"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "biochemverse",
@@ -1224,7 +1368,13 @@
         "anatomy",
         "3d",
         "education"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "chemsphere",
@@ -1257,7 +1407,13 @@
         "quiz",
         "stoichiometry",
         "education"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "54-testdna",
@@ -1284,7 +1440,13 @@
         "bioinformatics",
         "dashboard",
         "api"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "cv-amirul",
@@ -1308,7 +1470,13 @@
         "portfolio",
         "cv",
         "php"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "v0-portfolio",
@@ -1332,7 +1500,13 @@
         "portfolio",
         "nextjs",
         "personal"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     },
     {
       "id": "invitation-wedding",
@@ -1356,7 +1530,13 @@
       ],
       "gaps": [
         "Belum ada README di folder project"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Audit 2026-11-19 (AI + verifikasi kode). Status: attention. Findings: 0 (verifikasi via security write endpoint). Catatan: AI audit mengalami kendal koneksi (502 tapi security write berhasil)."
+      }
     }
   ]
 }
