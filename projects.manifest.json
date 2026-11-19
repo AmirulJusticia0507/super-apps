@@ -209,7 +209,13 @@
         "translation",
         "nlp",
         "local-llm"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 5,
+        "reviewed": "2026-11-19",
+        "summary": "Test hasil audit"
+      }
     },
     {
       "id": "stt-engine",
@@ -234,7 +240,13 @@
         "speech-to-text",
         "whisper",
         "audio"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "face-recognition",
@@ -259,7 +271,13 @@
         "computer-vision",
         "biometrics",
         "opencv"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "comic-to-video-ai",
@@ -285,7 +303,13 @@
         "generative-video",
         "image-diffusion",
         "ffmpeg"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "leaflens",
@@ -312,7 +336,13 @@
         "plant-id",
         "edge-ai",
         "mobile"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "pharmai",
@@ -337,7 +367,13 @@
         "healthcare",
         "drug-interaction",
         "llm"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "medmatch",
@@ -362,7 +398,13 @@
         "healthcare",
         "matching",
         "ml"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "lex-dss",
@@ -388,7 +430,13 @@
         "legal",
         "decision-support",
         "rag"
-      ]
+      ],
+      "security": {
+        "status": "attention",
+        "findings": 0,
+        "reviewed": "2026-11-19",
+        "summary": "Test"
+      }
     },
     {
       "id": "lex-integrity",
@@ -417,7 +465,13 @@
         "scraper",
         "local-llm",
         "jdih"
-      ]
+      ],
+      "security": {
+        "status": "critical",
+        "findings": 5,
+        "reviewed": "2026-11-19",
+        "summary": "Audit statis menemukan risiko deployment kritis dari fallback credential/secret dan paparan Ollama melalui konfigurasi dev yang menggunakan wildcard serta ngrok. Port PostgreSQL dan Redis juga dipublikasikan, dan Compose menggunakan mode development. Tidak ada secret API bernilai nyata yang tampak pada berkas yang diberikan; kredensial README dan fallback Compose tetap berisiko bila digunakan. Status dependency rentan belum dapat dipastikan tanpa audit advisori terhadap lockfile lengkap."
+      }
     },
     {
       "id": "e-lawyer",
@@ -443,7 +497,13 @@
         "litigation",
         "case-management",
         "rbac"
-      ]
+      ],
+      "security": {
+        "status": "critical",
+        "findings": 8,
+        "reviewed": "2026-11-19",
+        "summary": "Risiko utama berasal dari deployment Compose: PostgreSQL memakai password literal dan port terbuka, sedangkan Redis terbuka tanpa autentikasi. Terdapat pula potensi kegagalan deployment karena deklarasi Node >=18 tidak selaras dengan beberapa dependency yang mensyaratkan Node 20 atau 22 ke atas. Tidak ada bukti yang cukup untuk menyatakan dependency tertentu memiliki CVE tanpa menjalankan audit, dan tidak tampak secret produksi aktual selain kredensial database literal pada Compose."
+      }
     },
     {
       "id": "e-notary-bprs",
@@ -468,7 +528,13 @@
         "notary",
         "keycloak",
         "banking"
-      ]
+      ],
+      "security": {
+        "status": "critical",
+        "findings": 9,
+        "reviewed": "2026-11-19",
+        "summary": "Ditemukan risiko deployment kritis berupa fallback password default, publikasi PostgreSQL dan Keycloak, serta konfigurasi Keycloak development. Terdapat risiko tambahan pada koneksi database tanpa TLS, potensi pembawaan file .env ke build layer, image yang tidak dipin ke digest, dan container API yang tidak di-hardening sebagai non-root. Tidak ada CVE dependency spesifik yang dapat dipastikan hanya dari berkas yang diberikan; pemindaian dependency dan image masih diperlukan."
+      }
     },
     {
       "id": "e-voting-system-netizen",

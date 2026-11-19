@@ -78,7 +78,7 @@ Ada dua cara menjalankan audit:
 node infra/serve.mjs --port 8811     # http://127.0.0.1:8811
 ```
 
-Di halaman audit: pilih model (default `gpt-5.6-terra`) → klik **Jalankan Audit**.
+Di halaman audit: pilih model (default `gpt-6-luna`) → klik **Jalankan Audit**.
 Server menjalankan `scripts/audit-security-ai.mjs` di sisi server; `GRIPHUBROUTER_API_KEY`
 dibaca dari environment server dan **tidak pernah ke browser**. Hasil tampil beserta
 editor; edit ringkasan hasil verifikasi lalu klik **Simpan ke manifest** (menulis hanya

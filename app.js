@@ -151,8 +151,9 @@
             <h3>Audit dengan model AI</h3>
             <p>Gunakan model slug dari GriphubRouter. API key dibaca dari environment server (node infra/serve.mjs) dan tidak pernah dikirim ke browser.</p>
             <label class="audit-field">Model AI GriphubRouter
-              <input id="audit-model" type="text" list="audit-model-options" placeholder="Masukkan model slug" autocomplete="off" aria-label="Model AI GriphubRouter" value="gpt-5.6-terra" />
+              <input id="audit-model" type="text" list="audit-model-options" placeholder="Masukkan model slug" autocomplete="off" aria-label="Model AI GriphubRouter" value="gpt-6-luna" />
               <datalist id="audit-model-options">
+                <option value="gpt-6-luna"></option>
                 <option value="gpt-5.6-terra"></option>
                 <option value="gpt-5.1-terra"></option>
                 <option value="gpt-5-terra"></option>
